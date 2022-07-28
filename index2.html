@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/jquery-3.5.1.min.js" type="text/jscript"></script>
+		<style>
+			*{margin: 0 auto;padding: 0;}/*统配*/
+			.bg:hover{cursor:url("img/cursor.png"),auto;}
+			.bg:active{cursor:url("img/cursor-down.png"),auto;}
+			.bg{//背景图
+				width: 100%;background:url(img/bg.jpg);
+				height: 1000px;max-width: 160rem;}
+			.bg>:first-child{text-align: center;}
+			.bg>:first-child div{width: 160px;height: 50px;border-radius:0 0 10px 10px;background: red;line-height:50px;color: #ffffff;font-size: 16px;font-weight:bolder;}
+			.flex{display:flex;justify-content:center;flex-wrap:wrap;position: relative;/*border: 1px solid red;*/margin:0 auto;max-width:800px;user-select: none;/*文字不可选中*/}
+			.flex div{width: 160px;height: 140px;display: inline-block;margin-right: 30px;position: relative;}
+			.hole{display: inline-block;width: 160px;position: absolute;bottom: 0; z-index: 1;}
+			.mouse{z-index: -10;position: absolute;bottom: 25px;left: 30px;width:100px;transition:2s;}
+		</style>
+	</head>
+	<body>
+		<div class="bg">
+			<div>
+				<div>
+					<span>得分为：</span>
+					<span class="df">0</span>
+				</div>
+			</div>
+			<div class="flex">
+				<div>
+					<img class="hole" src="img/hole.png">
+					<img class="mouse" src="img/mouse.png">
+				</div>
+				<div>
+					<img class="hole" src="img/hole.png">
+					<img class="mouse" src="img/mouse.png">
+				</div>
+				<div>
+					<img class="hole" src="img/hole.png">
+					<img class="mouse" src="img/mouse.png">
+				</div>
+				<div>
+					<img class="hole" src="img/hole.png">
+					<img class="mouse" src="img/mouse.png">
+				</div>
+				<div>
+					<img class="hole" src="img/hole.png">
+					<img class="mouse" src="img/mouse.png">
+				</div>
+				<div>
+					<img class="hole" src="img/hole.png">
+					<img class="mouse" src="img/mouse.png">
+				</div>
+				<div>
+					<img class="hole" src="img/hole.png">
+					<img class="mouse" src="img/mouse.png">
+				</div>
+				<div>
+					<img class="hole" src="img/hole.png">
+					<img class="mouse" src="img/mouse.png">
+				</div>
+				<div>
+					<img class="hole" src="img/hole.png">
+					<img class="mouse" src="img/mouse.png">
+				</div>
+				<div>
+					<img class="hole" src="img/hole.png">
+					<img class="mouse" src="img/mouse.png">
+				</div>
+				<div>
+					<img class="hole" src="img/hole.png">
+					<img class="mouse" src="img/mouse.png">
+				</div>
+				<div>
+					<img class="hole" src="img/hole.png">
+					<img class="mouse" src="img/mouse.png">
+				</div>
+				<div>
+					<img class="hole" src="img/hole.png">
+					<img class="mouse" src="img/mouse.png">
+				</div>
+				<div>
+					<img class="hole" src="img/hole.png">
+					<img class="mouse" src="img/mouse.png">
+				</div>
+				<div>
+					<img class="hole" src="img/hole.png">
+					<img class="mouse" src="img/mouse.png">
+				</div>
+				<div>
+					<img class="hole" src="img/hole.png">
+					<img class="mouse" src="img/mouse.png">
+				</div>
+				<audio src="mp3/music.mp3" autoplay="autoplay" loop="loop">
+				<div id="dazhong"></div>
+			</div>
+		</div>
+		<script>
+			var mouse=document.getElementsByClassName('mouse');//定义容器变量
+			var df=document.getElementsByClassName('df');
+			var f=0;
+			for(var i=0;i<mouse.length;i++){
+				mouse[i].onclick=function(){
+					this.style.display="none";
+					this.style.zIndex="-10";
+					f=f+10;
+					df[0].innerHTML=f;
+					voice();//打中
+					}
+			}
+			//打中的时候出现声音
+			function voice(){
+				let da = document.getElementById("dazhong");
+				da.innerHTML='<audio src="mp3/dazhong.wav" autoplay="autoplay"></audio>';
+				setTimeout(function(){
+					da.innerHTML="";
+				},300);
+			}
+			hidden();
+			function hidden(){
+				var mouse=document.getElementsByClassName('mouse');
+				for(var i=0;i<mouse.length;i++){
+					//mouse[i].style.display="none";
+					$(".mouse").eq(i).animate({"z-index": "-10"},1000);
+				}
+			}
+			
+			function block(){
+				hidden();
+				var t=Math.ceil(Math.random()*15);
+				//alert(t);
+				for(var i=0;i<mouse.length;i++){
+					if(t%i==0&&i!=1){
+						$(".mouse").eq(i).animate({"z-index": "10"},1000);
+						//mouse[i].style.zIndex="10";
+						//mouse[i].style.display="block";
+					}
+				}
+				if(t%2==0){
+					/*mouse[0].style.display="none";
+					mouse[1].style.zIndex="10";
+					mouse[1].style.display="block";*/
+					$(".mouse").eq(0).animate({"z-index": "10"},1000);
+				}else if(t%3==0){
+					/*mouse[1].style.display="none";
+					mouse[0].style.zIndex="10";
+					mouse[0].style.display="block";*/
+					$(".mouse").eq(1).animate({"z-index": "10"},1000);
+				}
+			}
+			setInterval('block()',3000);
+			
+		</script>
+	</body>
+</html>

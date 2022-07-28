@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/jquery-3.5.1.min.js" type="text/jscript"></script>
+		<style>
+			*{margin: 0 auto;padding: 0;}
+			body{width: 100%;background:url(img/bg.jpg);display:flex;justify-content:center;flex-wrap:wrap;}
+			img{margin:0 auto;display: inline-block;position: absolute;bottom:0;}
+		</style>
+	</head>
+	<body>
+		<img class="mouse" src="img/mouse.png">
+		<script>
+			function da(){
+				$(".mouse").animate({"width": "+=50"},1000);
+			}
+			setInterval('da()',2000);
+		</script>
+	</body>
+</html>
